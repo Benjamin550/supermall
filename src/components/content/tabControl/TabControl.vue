@@ -1,38 +1,36 @@
 <!--  -->
 <template>
-    <swiper>
-        <swiper-item v-for="(item,index) in banners" :key="index">
-            <a :href="item.link">
-                <img :src="item.image" alt="" @load="imageLoad">
-            </a>
-        </swiper-item>
-    </swiper>
+<div class='tab-control'>
+    <div v-for="(item,index) in titles" :key="index" 
+    class="tab-control-item" :class="{active:index===currentIndex} " @click="itemClick(index)">
+        <span>{{item}}</span>
+    </div>
+</div>
 </template>
 
 <script>
 //这里可以导入其他文件（比如：组件，工具js，第三方插件js，json文件，图片文件等等）
 //例如：import 《组件名称》 from '《组件路径》';
-import{Swiper,SwiperItem} from 'components/common/swiper'
+
 export default {
 //import引入的组件需要注入到对象中才能使用
-name:'HomeSwiper',
+name:'TabControl',
+components: {},
 props:{
-    banners:{
+    titles:{
         type:Array,
         default(){
             return[]
         }
     }
 },
-components: {
-    Swiper,
-    SwiperItem
-},
+
 data() {
 //这里存放数据
 return {
-    isLoad:false
-};
+    currentIndex:0,
+    
+}
 },
 //监听属性 类似于data概念
 computed: {},
@@ -40,12 +38,9 @@ computed: {},
 watch: {},
 //方法集合
 methods: {
-    imageLoad(){
-        if(!this.isLoad){
-        this.$emit('swiperImageLoad')
-        this.isLoad=true
-        }
-
+    itemClick(index){
+        this.currentIndex=index;
+        this.$emit('tabClick',index)
     }
 },
 //生命周期 - 创建完成（可以访问当前this实例）
@@ -66,5 +61,25 @@ activated() {}, //如果页面有keep-alive缓存功能，这个函数会触发
 }
 </script>
 <style scoped>
-
+    .tab-control{
+        display: flex;
+        text-align: center;
+        font-size: 15px;
+        background-color: #fff;
+    }
+    .tab-control-item{
+        flex: 1;
+        height: 40px;
+        line-height: 40px;
+    }
+    .tab-control-item span{
+        padding: 5px;
+    }
+    .active{
+        color: var(--color-high-text);
+        
+    }
+    .active span{
+        border-bottom:3px solid var(--color-tint);
+    }
 </style>

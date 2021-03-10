@@ -1,37 +1,34 @@
 <!--  -->
 <template>
-    <swiper>
-        <swiper-item v-for="(item,index) in banners" :key="index">
-            <a :href="item.link">
-                <img :src="item.image" alt="" @load="imageLoad">
-            </a>
-        </swiper-item>
-    </swiper>
+<div class='goods'>
+    <goods-list-item v-for="(item,index) in goods" :key="index" :goods-item="item"></goods-list-item>
+    <!-- goods-item对应的是GoodsListItem里面的props里面的goodsitem’ -->
+</div>
 </template>
 
 <script>
 //这里可以导入其他文件（比如：组件，工具js，第三方插件js，json文件，图片文件等等）
 //例如：import 《组件名称》 from '《组件路径》';
-import{Swiper,SwiperItem} from 'components/common/swiper'
+import GoodsListItem from './GoodsListItem'
 export default {
+
 //import引入的组件需要注入到对象中才能使用
-name:'HomeSwiper',
+name:'GoodsList',
+components: {
+    GoodsListItem
+},
 props:{
-    banners:{
+    goods:{
         type:Array,
         default(){
-            return[]
-        }
+        return []
     }
-},
-components: {
-    Swiper,
-    SwiperItem
+    }
 },
 data() {
 //这里存放数据
 return {
-    isLoad:false
+
 };
 },
 //监听属性 类似于data概念
@@ -40,13 +37,7 @@ computed: {},
 watch: {},
 //方法集合
 methods: {
-    imageLoad(){
-        if(!this.isLoad){
-        this.$emit('swiperImageLoad')
-        this.isLoad=true
-        }
 
-    }
 },
 //生命周期 - 创建完成（可以访问当前this实例）
 created() {
@@ -66,5 +57,9 @@ activated() {}, //如果页面有keep-alive缓存功能，这个函数会触发
 }
 </script>
 <style scoped>
-
+    .goods{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
 </style>

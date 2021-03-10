@@ -1,27 +1,27 @@
 <!--  -->
 <template>
-    <swiper>
-        <swiper-item v-for="(item,index) in banners" :key="index">
-            <a :href="item.link">
-                <img :src="item.image" alt="" @load="imageLoad">
-            </a>
+<div class='detail-swiper'>
+    <swiper class="swiper1">
+        <swiper-item class="swiper-item" v-for="(item,index) in topImages" :key="index">
+            <img :src="item" alt="">
         </swiper-item>
     </swiper>
+</div>
 </template>
 
 <script>
 //这里可以导入其他文件（比如：组件，工具js，第三方插件js，json文件，图片文件等等）
 //例如：import 《组件名称》 from '《组件路径》';
-import{Swiper,SwiperItem} from 'components/common/swiper'
+import {Swiper,SwiperItem} from 'components/common/swiper'
 export default {
 //import引入的组件需要注入到对象中才能使用
-name:'HomeSwiper',
+name:'DetailSwiper',
 props:{
-    banners:{
+    topImages:{
         type:Array,
         default(){
-            return[]
-        }
+            return []
+    }
     }
 },
 components: {
@@ -31,7 +31,7 @@ components: {
 data() {
 //这里存放数据
 return {
-    isLoad:false
+
 };
 },
 //监听属性 类似于data概念
@@ -40,13 +40,7 @@ computed: {},
 watch: {},
 //方法集合
 methods: {
-    imageLoad(){
-        if(!this.isLoad){
-        this.$emit('swiperImageLoad')
-        this.isLoad=true
-        }
 
-    }
 },
 //生命周期 - 创建完成（可以访问当前this实例）
 created() {
@@ -66,5 +60,8 @@ activated() {}, //如果页面有keep-alive缓存功能，这个函数会触发
 }
 </script>
 <style scoped>
-
+    .swiper1{
+        height: 300px;
+        overflow: hidden;
+    }
 </style>
