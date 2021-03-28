@@ -17,7 +17,7 @@ export default {
 //import引入的组件需要注入到对象中才能使用
 components: {
     BScroll
-},
+}, 
 props:{
     probeType:{
         type:Number,
@@ -66,7 +66,8 @@ mounted() {
         probeType:this.probeType,
         pullUpLoad:this.pullUpLoad,
         click:true,
-        mouseWheel:true
+        mouseWheel:true,
+        observeDOM:true
     })
     //监听滚动的位置
     this.scroll.on('scroll',(position)=>{

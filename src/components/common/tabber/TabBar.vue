@@ -48,7 +48,6 @@ activated() {}, //如果页面有keep-alive缓存功能，这个函数会触发
         #tab-bar{
         display: flex;
         background-color: #f6f6f6;
-
         position: fixed;
         left: 0;
         right: 0;
